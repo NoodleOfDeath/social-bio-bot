@@ -19,6 +19,7 @@ if (!password) {
   exit();
 }
 
+// Cycle profile picture with images found in `./img` every 30 seconds.
 const session = new IgDPSession({
   username,
   password,

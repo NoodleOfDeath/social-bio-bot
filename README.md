@@ -47,7 +47,9 @@ By default, the **safe** regex engine [`re2`](https://github.com/uhop/node-re2) 
 If you find this library useful for you, you can support it by donating any amount
 
 BTC: 3HNXnygb1HowTBbvhQrQ4vxekfQ2UM83sd
+
 SHIB: 0xBb8f7EbF3D7f54BAcadece3dada9ab2358C90635
+
 ETH: 0xec78f794489D511137770Ae144A550B50c2AFF92
 
 ## Examples
@@ -85,6 +87,7 @@ if (!password) {
   exit();
 }
 
+// Cycle profile picture with images found in `./img` every 30 seconds.
 const session = new IgDPSession({
   username,
   password,
