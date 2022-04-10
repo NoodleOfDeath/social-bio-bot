@@ -1,7 +1,7 @@
 {
   "name": "instagram-dynamic-profile",
   "description": "Lightweight library for creating a service that dynamically makes updates to your Instagram profile information periodically.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

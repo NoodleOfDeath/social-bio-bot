@@ -58,6 +58,11 @@ You can find usage examples [here](examples).
 
 Be sure to create a `.env` file in your project root with your Instagram
 credentials and match the format of [`.env.example`](.env.example).
+In most cases you will also need to run the following inside the project/example directory.
+
+```bash
+npm i dotenv
+```
 
 _Note for JavaScript users:_
 As of Node v.13.5.0, there isn't support for ESModules and the 'import'-syntax.
@@ -69,28 +74,12 @@ So you have to read the imports in the examples like this:
 // Import modules
 import 'dotenv/config';
 import { resolve } from 'path';
-import { exit } from 'process';
 import { IgCycleProfilePictureTask, IgDPSession } from 'instagram-dynamic-profile';
-
-const username: string = process.env.IG_USERNAME as string;
-if (!username) {
-  console.error(
-    'Missing IG_USERNAME environment variable in .env file.\nView README and/or .env.example file on how to fix this.',
-  );
-  exit();
-}
-const password: string = process.env.IG_PASSWORD as string;
-if (!password) {
-  console.error(
-    'Missing IG_PASSWORD environment variable in .env file.\nView README and/or .env.example file on how to fix this.',
-  );
-  exit();
-}
 
 // Cycle profile picture with images found in `./img` every 30 seconds.
 const session = new IgDPSession({
-  username,
-  password,
+  username: process.env.IG_USERNAME as string,
+  password: process.env.IG_PASSWORD as string,
   tasks: [new IgCycleProfilePictureTask(resolve('./img'))],
 });
 
