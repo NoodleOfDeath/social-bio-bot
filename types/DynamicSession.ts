@@ -64,7 +64,7 @@ export default class DynamicSession implements IDynamicSession {
         this.intervals.push(setInterval(() => {
           task.generate(this.ig).then(() => {
           }).catch((error: Error) => console.error(error));
-        }, task.refresh_rate))
+        }, task.interval))
       })
       console.log(this.intervals.length);
     }).catch((error: Error) => console.error(error));
