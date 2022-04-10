@@ -93,7 +93,6 @@ session.start();
 ```typescript
 // Import modules
 import 'dotenv/config';
-import { resolve } from 'path';
 import { IgDPCycleBioTask, IgDPSession } from 'instagram-dynamic-profile';
 
 // Dynamically update the profile bio  every 30 seconds to have the most recent
