@@ -1,16 +1,18 @@
 
-export default class DynamicTask {
+
+
+export default class DynamicTask<ApiClient> {
   
-  private generator: () => Promise<void>;
+  private generator: (client: ApiClient) => Promise<void>;
   public refresh_rate: number;
   
-  public constructor(generator: () => Promise<void>, refresh_rate = 10000) {
+  public constructor(generator: (client: ApiClient) => Promise<void>, refresh_rate = 10000) {
     this.generator = generator;
     this.refresh_rate = refresh_rate;
   }
   
-  public generate(): Promise<void> {
-    return this.generator();
+  public generate(client: ApiClient): Promise<void> {
+    return this.generator(client);
   }
   
 }

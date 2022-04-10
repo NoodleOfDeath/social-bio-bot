@@ -4,21 +4,24 @@ import 'dotenv/config';
 import fs from 'fs';
 import DynamicSession from './types/DynamicSession';
 import DynamicTask from './types/DynamicTask';
+import { IgApiClient } from 'instagram-private-api';
 
 const username: string = process.env.IG_USERNAME as string;
 if (!username) DynamicSession.error('missingEnv', 'IG_USERNAME');
 const password: string = process.env.IG_PASSWORD as string;
 if (!password) DynamicSession.error('missingEnv', 'IG_PASSWORD');
 
-const tasks: DynamicTask[] = [
-  new DynamicTask((): Promise<void> => {
+const tasks: DynamicTask<IgApiClient>[] = [
+  new DynamicTask((client: IgApiClient): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
       const img = `./img/${Math.floor(Math.random() * 5) + 1}.jpeg`;
       console.log(`attempting to read file ${img}`);
       const promise = fs.promises.readFile(img);
       Promise.resolve(promise).then((buffer) => {
-        console.log(buffer);
-        resolve();
+        //console.log(buffer);
+        client.account.changeProfilePicture(buffer).then(() => {
+          resolve();
+        }).catch((error: Error) => reject(error))
       });
     });
   }),

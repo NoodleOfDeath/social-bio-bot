@@ -5,7 +5,7 @@ interface Config {
   username: string;
   password: string;
   proxy?: string;
-  tasks?: DynamicTask[];
+  tasks?: DynamicTask<IgApiClient>[];
 };
 
 class DynamicSessionError extends Error {
@@ -30,7 +30,7 @@ export interface IDynamicSession {
 export default class DynamicSession implements IDynamicSession {
   
   private config: Config;
-  private tasks: DynamicTask[];
+  private tasks: DynamicTask<IgApiClient>[];
   private intervals: unknown[] = [];
   
   private ig: IgApiClient = new IgApiClient();
@@ -62,8 +62,7 @@ export default class DynamicSession implements IDynamicSession {
                           this.config.password).then(() => {
       this.tasks.forEach((task) => {
         this.intervals.push(setInterval(() => {
-          task.generate().then(() => {
-            console.log('fuck me sideways');
+          task.generate(this.ig).then(() => {
           }).catch((error: Error) => console.error(error));
         }, task.refresh_rate))
       })
