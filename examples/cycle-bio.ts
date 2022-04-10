@@ -1,7 +1,7 @@
 // Import modules
 import 'dotenv/config';
 import { exit } from 'process';
-import { IgDPCycleBioTask, IgDPSession } from '../src';
+import { IgDPCycleBioTask, IgDPSession } from '../src/node';
 
 const username: string = process.env.IG_USERNAME as string;
 if (!username) {

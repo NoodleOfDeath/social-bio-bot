@@ -1,22 +1,14 @@
 import { IgApiClient } from 'instagram-private-api';
-import { IDPSession } from 'src/types/session';
-import { ITask } from '../types';
-
-interface Config<Session> {
-  username: string;
-  password: string;
-  proxy?: string;
-  tasks?: ITask<Session>[];
-}
+import { IDPSession, IDPSessionConfig, ITask } from '../types';
 
 export class IgDPSession implements IDPSession<IgApiClient> {
-  private config: Config<IgDPSession>;
+  private config: IDPSessionConfig<IgDPSession>;
   private tasks: ITask<IDPSession<IgApiClient>>[];
   private intervals: NodeJS.Timeout[] = [];
 
   private ig: IgApiClient = new IgApiClient();
 
-  public constructor(config: Config<IgDPSession>) {
+  public constructor(config: IDPSessionConfig<IgDPSession>) {
     this.config = config;
     this.tasks = config.tasks || [];
     this.ig.state.generateDevice(config.username);

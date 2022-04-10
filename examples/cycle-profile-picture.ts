@@ -2,7 +2,7 @@
 import 'dotenv/config';
 import { resolve } from 'path';
 import { exit } from 'process';
-import { IgDPCycleProfilePictureTask, IgDPSession } from '../src';
+import { IgDPCycleProfilePictureTask, IgDPSession } from '../src/node';
 
 const username: string = process.env.IG_USERNAME as string;
 if (!username) {
