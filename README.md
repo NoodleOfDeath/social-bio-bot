@@ -70,17 +70,42 @@ So you have to read the imports in the examples like this:
 
 `import { A } from 'b'` ➡ `const { A } = require('b')`
 
+### Cycling Profile Picture
+
 ```typescript
 // Import modules
 import 'dotenv/config';
 import { resolve } from 'path';
-import { IgCycleProfilePictureTask, IgDPSession } from 'instagram-dynamic-profile';
+import { IgDPCycleProfilePictureTask, IgDPSession } from 'instagram-dynamic-profile';
 
 // Cycle profile picture with images found in `./img` every 30 seconds.
 const session = new IgDPSession({
   username: process.env.IG_USERNAME as string,
   password: process.env.IG_PASSWORD as string,
-  tasks: [new IgCycleProfilePictureTask(resolve('./img'))],
+  tasks: [new IgDPCycleProfilePictureTask(resolve('./img'))],
+});
+
+session.start();
+```
+
+### Cycling Biography
+
+```typescript
+// Import modules
+import 'dotenv/config';
+import { resolve } from 'path';
+import { IgDPCycleBioTask, IgDPSession } from 'instagram-dynamic-profile';
+
+// Dynamically update the profile bio  every 30 seconds to have the most recent
+// timestamp in the last 30 seconds.
+const session = new IgDPSession({
+  username: process.env.IG_USERNAME as string,
+  password: process.env.IG_PASSWORD as string,
+  tasks: [
+    new IgDPCycleBioTask((): string => {
+      return `Today's timestamp is:\n${new Date()}`;
+    }),
+  ],
 });
 
 session.start();

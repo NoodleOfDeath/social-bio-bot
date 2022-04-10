@@ -1,8 +1,7 @@
 // Import modules
 import 'dotenv/config';
-import { resolve } from 'path';
 import { exit } from 'process';
-import { IgDPCycleProfilePictureTask, IgDPSession } from '../src';
+import { IgDPCycleBioTask, IgDPSession } from '../src';
 
 const username: string = process.env.IG_USERNAME as string;
 if (!username) {
@@ -23,7 +22,11 @@ if (!password) {
 const session = new IgDPSession({
   username,
   password,
-  tasks: [new IgDPCycleProfilePictureTask(resolve('./img'))],
+  tasks: [
+    new IgDPCycleBioTask((): string => {
+      return `Today's timestamp is:\n${new Date()}`;
+    }),
+  ],
 });
 
 session.start();
