@@ -25,7 +25,6 @@ export class IgCycleProfilePictureTask implements ITask<IDPSession<IgApiClient>>
           while (n === this.index) n = Math.floor(Math.random() * images.length);
           this.index = n;
           const imgPath = join(dir, images[this.index]);
-          console.log(`attempting to upload file ${images[this.index]}`);
           const buffer = readFileSync(imgPath);
           session.client.account
             .changeProfilePicture(buffer)

@@ -28,7 +28,6 @@ export class IgDPSession implements IDPSession<IgApiClient> {
   }
 
   public start() {
-    console.log('starting session');
     this.ig.account
       .login(this.config.username, this.config.password)
       .then(() => {
@@ -51,7 +50,6 @@ export class IgDPSession implements IDPSession<IgApiClient> {
   }
 
   public stop() {
-    console.log('stopping session');
     this.intervals.forEach(id => clearInterval(id));
     this.intervals = [];
   }
