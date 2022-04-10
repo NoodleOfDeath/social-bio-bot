@@ -7,6 +7,16 @@
 
 ---
 
+This library uses the [`instagram-private-api`](https://www.npmjs.com/package/instagram-private-api)
+to automate dynamic updates to an Instagram profile such as cycling through
+profile pictures every 30 seconds.
+
+**Note**: the default refresh interval is set to 30000ms (30 seconds) for most
+dynamic tasks. If this interval is set below 20 seconds, there is a chance
+Instagrams API will block requests if more than 200 are made within an hour.
+
+---
+
 ## Table of Contents
 
 - [Install](#install)
@@ -44,6 +54,9 @@ ETH: 0xec78f794489D511137770Ae144A550B50c2AFF92
 
 You can find usage examples [here](examples).
 
+Be sure to create a `.env` file in your project root with your Instagram
+credentials and match the format of [`.env.example`](.env.example).
+
 _Note for JavaScript users:_
 As of Node v.13.5.0, there isn't support for ESModules and the 'import'-syntax.
 So you have to read the imports in the examples like this:
@@ -54,18 +67,23 @@ So you have to read the imports in the examples like this:
 // Import modules
 import 'dotenv/config';
 import { resolve } from 'path';
-import { IgCycleProfilePictureTask, IgDPSession } from '../src';
+import { exit } from 'process';
+import { IgCycleProfilePictureTask, IgDPSession } from 'instagram-dynamic-profile';
 
 const username: string = process.env.IG_USERNAME as string;
-if (!username)
+if (!username) {
   console.error(
-    'Missing IG_USERNAME environment variable in .env file. View README and/or .env.example file on how to fix this.',
+    'Missing IG_USERNAME environment variable in .env file.\nView README and/or .env.example file on how to fix this.',
   );
+  exit();
+}
 const password: string = process.env.IG_PASSWORD as string;
-if (!password)
+if (!password) {
   console.error(
-    'Missing IG_PASSWORD environment variable in .env file. View README and/or .env.example file on how to fix this.',
+    'Missing IG_PASSWORD environment variable in .env file.\nView README and/or .env.example file on how to fix this.',
   );
+  exit();
+}
 
 const session = new IgDPSession({
   username,
