@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "ts-node idp.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "instagram-private-api": "^1.45.2",
+    "lodash": "^4.17.21",
+    "re2": "^1.17.4"
+  }
+}
