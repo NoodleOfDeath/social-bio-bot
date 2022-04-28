@@ -1,41 +1,77 @@
-# instagram-dynamic-profile library
+# biobot
 
-![logo](https://cloud.githubusercontent.com/assets/1809268/15931032/2792427e-2e56-11e6-831e-ffab238cc4a2.png)
-
-[![npm](https://img.shields.io/npm/dm/instagram-dynamic-profile.svg?maxAge=600)](https://www.npmjs.com/package/instagram-dynamic-profile)
-[![npm](https://img.shields.io/npm/l/instagram-dynamic-profile.svg?maxAge=600)](https://github.com/noodleofdeath/instagram-private-api/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/dm/biobot.svg?maxAge=600)](https://www.npmjs.com/package/biobot)
+[![npm](https://img.shields.io/npm/l/biobot.svg?maxAge=600)](https://github.com/noodleofdeath/instagram-private-api/blob/main/LICENSE)
 
 ---
 
-This library uses the [`instagram-private-api`](https://www.npmjs.com/package/instagram-private-api)
-to automate dynamic updates to an Instagram profile such as cycling through
-profile pictures every 30 seconds.
+This library is designed to automate dynamic updates to an social profile
+account such as cycling through profile pictures every 30 seconds.
 
 **Note**: the default refresh interval is set to 30000ms (30 seconds) for most
 dynamic tasks. If this interval is set below 20 seconds, there is a chance
-Instagrams API will block requests if more than 200 are made within an hour.
+APIs will block requests if more than 200 are made within an hour.
 
 ---
 
 ## Table of Contents
 
+- [Run the Bot](#run-the-bot)
 - [Install](#install)
-- [Support us](#support-us)
 - [Examples](#examples)
+- [Support us](#support-us)
 - [Contribution](#contribution)
+- [Useful Links](#useful-links)
 
-## Install
+## Run the Bot
+
+You can run this bot from the command line directly (Docker support soon to be
+added).
+
+### Running from command line
+
+```bash
+$ git clone https://github.com/NoodleOfDeath/biobot
+$ cd biobot
+$ ./biotbot.ts
+biobot.ts v0.0.1
+usage: biobot.ts [-h] [-v] [-u USERNAME] [-p PASSWORD] [platform] [script]
+Lightweight library for creating a service that dynamically makes updates to a social profile account periodically.
+
+positional arguments:
+  platform              social platform to use
+                        Available platforms are:
+                        - fb, facebook
+                        - ig, instagram
+                        - tw, twitter
+  script                preset bot script to use
+                        run biobot.ts <platform> to see what scripts are available
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+  -u USERNAME, --username USERNAME
+                        supply social account username from stdin (overrides env variables)
+  -p PASSWORD, --password PASSWORD
+                        supply social account password from stdin (overrides env variables)
+```
+
+### Docker
+
+TBC
+
+## Install with NPM for Development
 
 From npm
 
 ```bash
-npm install instagram-dynamic-profile
+npm install biobot
 ```
 
 From github
 
 ```bash
-npm install github:noodleofdeath/instagram-dynamic-profile
+npm install github:noodleofdeath/biobot
 ```
 
 This package uses [`url-regex-safe`](https://www.npmjs.com/package/url-regex-safe) ([GitHub](https://github.com/spamscanner/url-regex-safe)) to check for links when sending direct messages.
@@ -54,61 +90,7 @@ ETH: 0xec78f794489D511137770Ae144A550B50c2AFF92
 
 ## Examples
 
-You can find usage examples [here](examples).
-
-Be sure to create a `.env` file in your project root with your Instagram
-credentials and match the format of [`.env.example`](.env.example).
-In most cases you will also need to run the following inside the project/example directory.
-
-```bash
-npm i dotenv
-```
-
-_Note for JavaScript users:_
-As of Node v.13.5.0, there isn't support for ESModules and the 'import'-syntax.
-So you have to read the imports in the examples like this:
-
-`import { A } from 'b'` ➡ `const { A } = require('b')`
-
-### Cycling Profile Picture
-
-```typescript
-// Import modules
-import 'dotenv/config';
-import { resolve } from 'path';
-import { IgDPCycleProfilePictureTask, IgDPSession } from 'instagram-dynamic-profile';
-
-// Cycle profile picture with images found in `./img` every 30 seconds.
-const session = new IgDPSession({
-  username: process.env.IG_USERNAME as string,
-  password: process.env.IG_PASSWORD as string,
-  tasks: [new IgDPCycleProfilePictureTask(resolve('./img'))],
-});
-
-session.start();
-```
-
-### Cycling Biography
-
-```typescript
-// Import modules
-import 'dotenv/config';
-import { IgDPCycleBioTask, IgDPSession } from 'instagram-dynamic-profile';
-
-// Dynamically update the profile bio  every 30 seconds to have the most recent
-// timestamp in the last 30 seconds.
-const session = new IgDPSession({
-  username: process.env.IG_USERNAME as string,
-  password: process.env.IG_PASSWORD as string,
-  tasks: [
-    new IgDPCycleBioTask((): string => {
-      return `Today's timestamp is:\n${new Date()}`;
-    }),
-  ],
-});
-
-session.start();
-```
+TBC
 
 ## Debugging
 
