@@ -1,23 +1,20 @@
-export enum EDPSocialPlatform {
-  fb = 'fb',
+export enum ESocialPlatform {
   facebook = 'facebook',
-  ig = 'ig',
   instagram = 'instagram',
-  tw = 'tw',
   twitter = 'twitter',
 }
 
-export enum EDPSocialPlatformShort {
+export enum ESocialPlatformShort {
   fb = 'fb',
   ig = 'ig',
   tw = 'tw',
 }
 
-export function abbrPlatform(platform: EDPSocialPlatform | string): EDPSocialPlatformShort {
+export function shortenPlatform(platform: ESocialPlatform | string): ESocialPlatformShort {
   const map = {
-    facebook: EDPSocialPlatformShort.fb,
-    instagram: EDPSocialPlatformShort.ig,
-    twitter: EDPSocialPlatformShort.tw,
+    facebook: ESocialPlatformShort.fb,
+    instagram: ESocialPlatformShort.ig,
+    twitter: ESocialPlatformShort.tw,
   };
   return map[platform] || platform;
 }

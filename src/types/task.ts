@@ -1,6 +1,6 @@
-import { IBBSession } from './session';
+import { ISession } from './session';
 
-export interface IBBTask<Client> {
-  generate: (session: IBBSession<Client>) => Promise<void>;
+export interface ITask<Client> {
+  generate: (session: ISession<Client>) => Promise<void>;
   interval: number;
 }

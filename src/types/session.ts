@@ -1,20 +1,20 @@
-import { IBBTask } from '.';
+import { ITask } from '.';
 
-export interface IBBHeadlessSession {
-  start(): void;
-  stop(): void;
-}
-
-export interface IBBSession<Client> extends IBBHeadlessSession {
-  readonly client: Client;
-}
-
-export interface IBBCredentials {
+export interface ICredentials {
   username: string;
   password: string;
 }
 
-export interface IBBSessionConfig<Client> extends IBBCredentials {
+export interface ISessionConfig<Client> extends ICredentials {
   proxy?: string;
-  tasks?: IBBTask<Client>[];
+  tasks?: ITask<Client>[];
+}
+
+export interface IHeadlessSession {
+  start(): void;
+  stop?(): void;
+}
+
+export interface ISession<Client> extends IHeadlessSession {
+  readonly client: Client;
 }

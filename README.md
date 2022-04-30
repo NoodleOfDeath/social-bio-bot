@@ -1,7 +1,7 @@
-# biobot
+# social-bio-bot
 
-[![npm](https://img.shields.io/npm/dm/biobot.svg?maxAge=600)](https://www.npmjs.com/package/biobot)
-[![npm](https://img.shields.io/npm/l/biobot.svg?maxAge=600)](https://github.com/noodleofdeath/instagram-private-api/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/dm/social-bio-bot.svg?maxAge=600)](https://www.npmjs.com/package/social-bio-bot)
+[![npm](https://img.shields.io/npm/l/social-bio-bot.svg?maxAge=600)](https://github.com/noodleofdeath/instagram-private-api/blob/main/LICENSE)
 
 ---
 
@@ -31,11 +31,11 @@ added).
 ### Running from command line
 
 ```bash
-$ git clone https://github.com/NoodleOfDeath/biobot
-$ cd biobot
+$ git clone https://github.com/NoodleOfDeath/social-bio-bot
+$ cd social-bio-bot
 $ ./biotbot.ts
-biobot.ts v0.0.1
-usage: biobot.ts [-h] [-v] [-u USERNAME] [-p PASSWORD] [platform] [script]
+social-bio-bot.ts v0.0.1
+usage: social-bio-bot.ts [-h] [-v] [-u USERNAME] [-p PASSWORD] [platform] [script]
 Lightweight library for creating a service that dynamically makes updates to a social profile account periodically.
 
 positional arguments:
@@ -45,7 +45,7 @@ positional arguments:
                         - ig, instagram
                         - tw, twitter
   script                preset bot script to use
-                        run biobot.ts <platform> to see what scripts are available
+                        run social-bio-bot.ts <platform> to see what scripts are available
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -65,13 +65,13 @@ TBC
 From npm
 
 ```bash
-npm install biobot
+npm install social-bio-bot
 ```
 
 From github
 
 ```bash
-npm install github:noodleofdeath/biobot
+npm install github:noodleofdeath/social-bio-bot
 ```
 
 This package uses [`url-regex-safe`](https://www.npmjs.com/package/url-regex-safe) ([GitHub](https://github.com/spamscanner/url-regex-safe)) to check for links when sending direct messages.

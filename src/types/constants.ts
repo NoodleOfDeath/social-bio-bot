@@ -1,9 +1,17 @@
-import { EDPSocialPlatform } from '.';
+import { ESocialPlatform } from '.';
+import { ESocialPlatformShort } from './social-platform.enum';
+import { enumList } from './utils';
 
-export const DP_DEFAULT_CYCLE_RATE = 1000 * 60 * 10; // 10 minutes
+export const SECOND = 1000;
+export const MINUTE = 60 * SECOND;
+export const HOUR = 60 * MINUTE;
+export const DAY = 24 * HOUR;
+export const DEFAULT_CYCLE_RATE = 5 * MINUTE; // 5 minutes
 
-export const DP_SOCIAL_PLATFORMS = {
-  fb: [EDPSocialPlatform.fb, EDPSocialPlatform.facebook],
-  ig: [EDPSocialPlatform.ig, EDPSocialPlatform.instagram],
-  tw: [EDPSocialPlatform.tw, EDPSocialPlatform.twitter],
+export const SOCIAL_PLATFORMS_SHORT = enumList(ESocialPlatformShort);
+
+export const SOCIAL_PLATFORMS = {
+  fb: [ESocialPlatformShort.fb, ESocialPlatform.facebook],
+  ig: [ESocialPlatformShort.ig, ESocialPlatform.instagram],
+  tw: [ESocialPlatformShort.tw, ESocialPlatform.twitter],
 };

@@ -1,21 +1,21 @@
-import { IgApiClient } from 'instagram-private-api';
-import { IBBSessionConfig, IBBSession, IBBTask } from '../../types';
+import { IgApiClient as ClientIG } from 'instagram-private-api';
+import { ISessionConfig, ISession, ITask } from '../../types';
 
-export class IgDPSession implements IBBSession<IgApiClient> {
-  private config: IBBSessionConfig<IgApiClient>;
-  private tasks: IBBTask<IgApiClient>[];
+export class ISessionIG implements ISession<ClientIG> {
+  private config: ISessionConfig<ClientIG>;
+  private tasks: ITask<ClientIG>[];
   private intervals: NodeJS.Timeout[] = [];
 
-  private ig: IgApiClient = new IgApiClient();
+  private ig: ClientIG = new ClientIG();
 
-  public constructor(config: IBBSessionConfig<IgApiClient>) {
+  public constructor(config: ISessionConfig<ClientIG>) {
     this.config = config;
     this.tasks = config.tasks || [];
     this.ig.state.generateDevice(config.username);
     if (config.proxy) this.ig.state.proxyUrl = config.proxy;
   }
 
-  public get client(): IgApiClient {
+  public get client(): ClientIG {
     return this.ig;
   }
 

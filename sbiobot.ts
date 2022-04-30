@@ -9,12 +9,12 @@ import { version } from './package.json';
 import { readdirSync } from 'fs';
 import * as path from 'path';
 import {
-  EDPSocialPlatformShort,
-  IBBCredentials,
-  IBBHeadlessSession,
-  DP_SOCIAL_PLATFORMS,
-  enumList,
-  abbrPlatform as platformShort,
+  ESocialPlatformShort,
+  ICredentials,
+  IHeadlessSession,
+  SOCIAL_PLATFORMS,
+  SOCIAL_PLATFORMS_SHORT,
+  shortenPlatform,
 } from './src';
 
 const __this = path.basename(__filename);
@@ -48,7 +48,7 @@ parser.add_argument('platform', {
     colors.cyanBright('social platform to use'),
     colors.greenBright('Available platforms are:'),
     colors.greenBright(
-      Object.values(DP_SOCIAL_PLATFORMS)
+      Object.values(SOCIAL_PLATFORMS)
         .map(p => `- ${p.join(', ')}`)
         .join('\n'),
     ),
@@ -60,6 +60,9 @@ parser.add_argument('script', {
     colors.cyanBright('preset bot script to use'),
     `run ${colors.redBright(`${__this} ${colors.yellowBright(`<platform>`)}`)} to see what scripts are available`,
   ].join('\n'),
+});
+parser.add_argument('subargs', {
+  nargs: '*',
 });
 
 const args = parser.parse_args();
@@ -86,25 +89,23 @@ function getPlatformScripts(platform: string): string[] {
   }
 }
 
-const creds = new Map<EDPSocialPlatformShort, IBBCredentials>(
-  enumList(EDPSocialPlatformShort).map(p => [
+const creds = new Map<ESocialPlatformShort, ICredentials>(
+  SOCIAL_PLATFORMS_SHORT.map(p => [
     p,
     { username: process.env[`${p.toUpperCase()}_USERNAME`], password: process.env[`${p.toUpperCase()}_PASSWORD`] },
   ]),
 );
 
-const platform = platformShort(args.platform as string);
+const platform = shortenPlatform(args.platform as string);
 if (!platform) {
   parser.print_help();
   exit();
 }
 
-const scripts = new Map<EDPSocialPlatformShort, string[]>(
-  enumList(EDPSocialPlatformShort).map(p => [p, getPlatformScripts(p)]),
-);
+const scripts = new Map<ESocialPlatformShort, string[]>(SOCIAL_PLATFORMS_SHORT.map(p => [p, getPlatformScripts(p)]));
 
 const script = args.script as string;
-if (!script)
+if (!script) {
   missingArgument(
     'script',
     [
@@ -113,6 +114,7 @@ if (!script)
       colors.greenBright((scripts.get(platform) || []).map((s: string) => `- ${s}`).join('\n')),
     ].join('\n'),
   );
+}
 
 if (!scripts.get(platform).includes(script)) {
   exitWithError(`${script} is not a valid script for the platform ${platform}`);
@@ -124,7 +126,7 @@ let password = creds.get(platform).password || (args.password as string);
 if (!password) missingArgument('password', 'You can also set this value in your environment. see .env-example');
 
 import(`${scriptsDir}/${platform}/${platform}-${script}.example`)
-  .then((module: { default: (props: Record<string, unknown>) => IBBHeadlessSession }) => {
+  .then((module: { default: (props: Record<string, unknown>) => IHeadlessSession }) => {
     const session = module.default({ username, password, directory: `${assetsDir}/img` });
     session.start();
   })
