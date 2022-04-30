@@ -1,7 +1,7 @@
 {
   "name": "social-bio-bot",
   "description": "Lightweight library for creating a service that dynamically makes updates to a social profile account periodically.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

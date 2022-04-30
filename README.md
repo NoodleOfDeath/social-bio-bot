@@ -33,9 +33,9 @@ added).
 ```bash
 $ git clone https://github.com/NoodleOfDeath/social-bio-bot
 $ cd social-bio-bot
-$ ./biotbot.ts
-social-bio-bot.ts v0.0.1
-usage: social-bio-bot.ts [-h] [-v] [-u USERNAME] [-p PASSWORD] [platform] [script]
+$ ./sbiotbot.ts
+sbiobot.ts v0.0.1
+usage: sbiobot.ts [-h] [-v] [-u USERNAME] [-p PASSWORD] [platform] [script]
 Lightweight library for creating a service that dynamically makes updates to a social profile account periodically.
 
 positional arguments:
@@ -45,7 +45,7 @@ positional arguments:
                         - ig, instagram
                         - tw, twitter
   script                preset bot script to use
-                        run social-bio-bot.ts <platform> to see what scripts are available
+                        run sbiobot.ts <platform> to see what scripts are available
 
 optional arguments:
   -h, --help            show this help message and exit
