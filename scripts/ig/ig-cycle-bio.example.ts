@@ -1,14 +1,14 @@
 // Import modules
 import { IIgCycleBioTask, ISessionIG } from '../../src';
 
-// Cycle profile picture with images found in `./img` every 30 seconds.
-const session = (props: { username: string; password: string }) =>
+// Cycles profile bio
+const session = (props: { username: string; password: string; bio?: string; interval?: number }) =>
   new ISessionIG({
     ...props,
     tasks: [
       new IIgCycleBioTask((): string => {
-        return `Today's timestamp is:\n${new Date()}`;
-      }, 30000),
+        return props.bio || `Today's timestamp is:\n${new Date()}`;
+      }, props.interval !== undefined ? props.interval : 30000),
     ],
   });
 
